@@ -1,4 +1,5 @@
 import 'package:fidelity_app/utils/theme.dart';
+import 'package:fidelity_app/views/complete_inscription_screen.dart';
 import 'package:fidelity_app/widgets/awesome_button_widget.dart';
 import 'package:fidelity_app/widgets/outlined_awesome_button.dart';
 import 'package:flutter/material.dart';
@@ -112,9 +113,11 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                         Row(
                           children: [
                             Expanded(
-                                child: AwesomeButtonWidget(
+                              child: AwesomeButtonWidget(
                               heigth: 48,
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(()=>const CompleteInscriptionScreen());
+                              },
                               widget: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [

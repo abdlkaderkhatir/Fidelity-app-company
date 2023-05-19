@@ -39,6 +39,8 @@ dependencies:
   get: ^4.6.1
   sizer: ^2.0.15
   pin_code_fields: ^7.3.0
+  line_icons: ^2.0.1
+  qr_code_scanner: ^1.0.1
 
 
 dev_dependencies:

@@ -1,5 +1,4 @@
 import 'package:fidelity_app/routes/routes.dart';
-import 'package:fidelity_app/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

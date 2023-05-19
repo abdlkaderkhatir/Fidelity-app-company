@@ -1,5 +1,4 @@
 import 'package:fidelity_app/routes/routes.dart';
-import 'package:fidelity_app/utils/theme.dart';
 import 'package:fidelity_app/widgets/awesome_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
