@@ -1,3 +1,4 @@
+import 'package:fidelity_app/views/confirmation_phone_screen.dart';
 import 'package:fidelity_app/views/login_phone_screen.dart';
 import 'package:fidelity_app/views/splash_screen.dart';
 import 'package:get/get.dart';
@@ -11,11 +12,12 @@ class AppRoutes{
   static final routes =[
     GetPage(name: Routes.splashScreen, page:()=>const SplashScreen()),
     GetPage(name: Routes.loginPhone, page:()=>const LoginPhoneScreen()),
+    GetPage(name: Routes.confirmePhone, page:()=>const ConfirmationPhoneScreen()),
   ];
 }
 
 class Routes{
   static const splashScreen = '/splash';
   static const loginPhone = '/loginphone';
-
+  static const confirmePhone = '/confirme';
 }

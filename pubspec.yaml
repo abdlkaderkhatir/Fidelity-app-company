@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.1
   sizer: ^2.0.15
+  pin_code_fields: ^7.3.0
 
 
 dev_dependencies:
