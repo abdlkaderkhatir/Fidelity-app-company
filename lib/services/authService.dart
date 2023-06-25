@@ -29,28 +29,29 @@ class AuthService {
 
   static Future<General<String>> signUp(RegistrationModel registration) async {
     try {
-      print(registration.toString());
-
-      Response response = await post(Uri.parse(urlSignup), body: 
-      {
-        "idToken": registration.idToken.toString(),
-        "name": registration.name.toString(),
-        "email": registration.email.toString(),
-        "birth_date": registration.birthDay.toString(),
-        "gender": registration.gender.toString(),
-      });
-
-      print(response.statusCode);
+     
+      Response response = await post(Uri.parse(urlSignup),
+          // headers: {"content-type": "application/json"},
+          body: {
+            "idToken": registration.idToken,
+            'name': registration.name,
+            'email': registration.email,
+            'birth_date': registration.birthDay,
+            'gender': registration.gender,
+          });
 
       if (response.statusCode == 201) {
         var jsonData = jsonDecode(response.body);
-        print( "===============================================================");
+        print("======headers=======");
+        print(response.headers);
+        print(
+            "===============================================================");
         print(jsonData);
-        print("===============================================================");
-        // return General<String>(data: jsonData["data"]["token"]);
-      } else
-      
-      if (response.statusCode == 409) {
+        print(
+            "===============================================================");
+
+        // return General<String>(data: response.headers["set-cookie"]);
+      } else if (response.statusCode == 409) {
         return General<String>(
             data: "", error: true, errorMessage: "account_exist");
       } else if (response.statusCode == 422) {
