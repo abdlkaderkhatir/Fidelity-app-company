@@ -41,6 +41,12 @@ dependencies:
   pin_code_fields: ^7.3.0
   line_icons: ^2.0.1
   qr_code_scanner: ^1.0.1
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.1
+  fluttertoast: ^8.0.9
+  http: ^0.13.4
+  intl: ^0.18.0
+  get_storage:
 
 
 dev_dependencies:

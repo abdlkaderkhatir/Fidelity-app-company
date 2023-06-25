@@ -1,5 +1,5 @@
+import 'package:fidelity_app/controllers/auth_controller.dart';
 import 'package:fidelity_app/utils/theme.dart';
-import 'package:fidelity_app/views/complete_inscription_screen.dart';
 import 'package:fidelity_app/widgets/awesome_button_widget.dart';
 import 'package:fidelity_app/widgets/outlined_awesome_button.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,13 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
+
 class ConfirmationPhoneScreen extends StatefulWidget {
-  const ConfirmationPhoneScreen({super.key});
+
+  final String phone, verficationId;
+
+  const ConfirmationPhoneScreen(
+      {super.key, required this.phone, required this.verficationId});
 
   @override
   State<ConfirmationPhoneScreen> createState() =>
@@ -18,6 +23,7 @@ class ConfirmationPhoneScreen extends StatefulWidget {
 class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController confirmation = TextEditingController();
+  final authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +56,9 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                         color: Colors.black,
                       )),
                   SizedBox(height: 2.h),
-                  const Text(
-                      'Enter The 6-digit PIN that was been sent to +213 663 12 34 56',
-                      style: TextStyle(
+                   Text(
+                      'Enter The 6-digit PIN that was been sent to +213 ${widget.phone}',
+                      style:const  TextStyle(
                         fontFamily: "Mont",
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
@@ -65,7 +71,7 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         PinCodeTextField(
-                          controller: confirmation,
+                          controller: authController.codePinController,
                           onSubmitted: (s) {},
                           enablePinAutofill: true,
                           autovalidateMode: AutovalidateMode.disabled,
@@ -115,12 +121,14 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                             Expanded(
                               child: AwesomeButtonWidget(
                               heigth: 48,
-                              onPressed: () {
-                                Get.to(()=>const CompleteInscriptionScreen());
+                              onPressed: () async {
+                                 if (formKey.currentState!.validate()) {  
+                                        await authController.confiramationPhoneNumber(widget.verficationId);   
+                                  }
                               },
-                              widget: Row(
+                              widget: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children:  [
                                   Text(
                                     "Create my Profile",
                                     style: TextStyle(
@@ -150,7 +158,9 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                       Expanded(
                           child: OutlineAwesomeButton(
                         heigth: 48,
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         text: "Resend Code",
                       ))
                     ],
