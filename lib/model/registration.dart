@@ -10,6 +10,6 @@ class RegistrationModel{
 
   @override
   String toString() {
-    return 'RegistrationModel{name: $name, idToken: $idToken, birthDay: $birthDay, email: $email, gender: $gender}';
+    return 'RegistrationModel{name: $name, idToken: $idToken, birth_date: $birthDay, email: $email, gender: $gender}';
   }
 }

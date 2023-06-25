@@ -25,11 +25,11 @@ class _CompleteInscriptionScreenState extends State<CompleteInscriptionScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
-  String selectedGender = "Male";
+  String selectedGender = "male";
 
   List<String> genderList = [
-    'Male',
-    'Female',
+    'male',
+    'female',
   ];
 
   final controller = Get.put(SignUpController());
@@ -198,17 +198,18 @@ class _CompleteInscriptionScreenState extends State<CompleteInscriptionScreen> {
                                               var response =
                                                   await AuthService.signUp(
                                                       RegistrationModel(
-                                                name: nameController.text,
-                                                email: emailController.text,
-                                                idToken: idTokenResult,
-                                                gender: selectedGender,
-                                                birthDay: controller
-                                                    .birthDateController.value,
-                                              ));
+                                                          name: nameController.text,
+                                                          email: emailController.text,
+                                                          idToken: idTokenResult,
+                                                          gender: selectedGender,
+                                                          birthDay: controller
+                                                              .birthDateController.value,
+                                                        ));
       
                                               if (response.error) {
-                                                // snackBarModel("echec".tr,response.errorMessage , true);
+                                                // snackBarModel("echec",response.errorMessage , true);
                                                 // controller.switchBool();
+                                                print("++++++++++++++++++++++++++++");
                                               } else {
                                                 Get.to(() => const HomeScreen());
                                                 // controller.switchBool();

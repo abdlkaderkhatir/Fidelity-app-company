@@ -3,13 +3,13 @@ import 'dart:math';
 import 'package:fidelity_app/model/registration.dart';
 import 'package:fidelity_app/services/general.dart';
 import 'package:fidelity_app/utils/server_data.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class AuthService {
-  
-  static Future<General<String>> login(String email, String password, String tokenNotification) async {
+  static Future<General<String>> login(
+      String email, String password, String tokenNotification) async {
     try {
-      http.Response response = await http.post(Uri.parse(urlLogin), body: {
+      Response response = await post(Uri.parse(urlLogin), body: {
         "email": email,
         "password": password,
         "fcm_token": tokenNotification
@@ -30,23 +30,27 @@ class AuthService {
   static Future<General<String>> signUp(RegistrationModel registration) async {
     try {
       print(registration.toString());
-      
-      http.Response response = await http.post(Uri.parse(urlSignup), body: {
-        "idToken": registration.idToken,
-        'name': registration.name,
-        'email': registration.email,
-        'birthDate': registration.birthDay,
-        'gender': registration.gender,
+
+      Response response = await post(Uri.parse(urlSignup), body: 
+      {
+        "idToken": registration.idToken.toString(),
+        "name": registration.name.toString(),
+        "email": registration.email.toString(),
+        "birth_date": registration.birthDay.toString(),
+        "gender": registration.gender.toString(),
       });
 
+      print(response.statusCode);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         var jsonData = jsonDecode(response.body);
-        print("===============================================================");
+        print( "===============================================================");
         print(jsonData);
         print("===============================================================");
         // return General<String>(data: jsonData["data"]["token"]);
-      } else if (response.statusCode == 409) {
+      } else
+      
+      if (response.statusCode == 409) {
         return General<String>(
             data: "", error: true, errorMessage: "account_exist");
       } else if (response.statusCode == 422) {
