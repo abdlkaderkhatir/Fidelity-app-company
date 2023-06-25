@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "906464662107",
+    "project_id": "fidelity-c9836",
+    "storage_bucket": "fidelity-c9836.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906464662107:android:6a0e0defa631497c6da57e",
+        "android_client_info": {
+          "package_name": "com.example.fidelity_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906464662107-0bbt6o3gk9s6k9f2j86ehpr1alpc6ngd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwo9wzFGi_2yPgmUO6CDctll2zjA6N4Ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906464662107-0bbt6o3gk9s6k9f2j86ehpr1alpc6ngd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
