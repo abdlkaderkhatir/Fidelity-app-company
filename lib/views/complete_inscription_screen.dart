@@ -87,138 +87,140 @@ class _CompleteInscriptionScreenState extends State<CompleteInscriptionScreen> {
                           color: Colors.black,
                         )),
                     SizedBox(height: 5.h),
-      
+
                     // Form
                     Form(
-                        key: formKey,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextForm(
-                                  controller: nameController,
-                                  validator: (value) {},
-                                  text: "Full Name"),
-                              const SizedBox(height: 20),
-                              TextForm(
-                                  controller: emailController,
-                                  validator: (value) {},
-                                  text: "Email"),
-                              const SizedBox(height: 20),
-                              Obx(
-                                () => InputDateComponent(
-                                  // leadingIcon: 'assets/icons/fi-rr-calendar.svg',
-                                  hintText:
-                                      controller.birthDateController.value == ""
-                                          ? 'birthDate'.tr
-                                          : controller.birthDateController.value,
-                                  controller: controller,
-                                  function: controller.changeDate,
-                                  validate: (value) {
-                                    if (controller.birthDateController.isEmpty) {
-                                      return "birthdate_req".tr;
-                                    }
-                                    return null;
-                                  },
-                                ),
+                      key: formKey,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextForm(
+                                controller: nameController,
+                                validator: (value) {},
+                                text: "Full Name"),
+                            const SizedBox(height: 20),
+                            TextForm(
+                                controller: emailController,
+                                validator: (value) {},
+                                text: "Email"),
+                            const SizedBox(height: 20),
+                            Obx(
+                              () => InputDateComponent(
+                                // leadingIcon: 'assets/icons/fi-rr-calendar.svg',
+                                hintText:
+                                    controller.birthDateController.value == ""
+                                        ? 'birthDate'.tr
+                                        : controller.birthDateController.value,
+                                controller: controller,
+                                function: controller.changeDate,
+                                validate: (value) {
+                                  if (controller.birthDateController.isEmpty) {
+                                    return "birthdate_req".tr;
+                                  }
+                                  return null;
+                                },
                               ),
-                              const SizedBox(height: 20),
-                              SizedBox(
-                                height: 48,
-                                child: DropdownButtonFormField(
-                                  iconDisabledColor: Colors.white,
-                                  iconEnabledColor: Colors.white,
-                                  value: selectedGender,
-                                  items: genderList.map((value) {
-                                    return DropdownMenuItem(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      selectedGender = newValue!;
-                                    });
-                                  },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                      size: 24,
-                                      color: fieldGrey,
-                                    ),
-                                    // labelText: 'Gender',
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide:
-                                          BorderSide(color: fieldGrey, width: 1),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide:
-                                          BorderSide(color: fieldGrey, width: 1),
-                                    ),
+                            ),
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              height: 48,
+                              child: DropdownButtonFormField(
+                                iconDisabledColor: Colors.white,
+                                iconEnabledColor: Colors.white,
+                                value: selectedGender,
+                                items: genderList.map((value) {
+                                  return DropdownMenuItem(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedGender = newValue!;
+                                  });
+                                },
+                                decoration: const InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    size: 24,
+                                    color: fieldGrey,
+                                  ),
+                                  // labelText: 'Gender',
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide:
+                                        BorderSide(color: fieldGrey, width: 1),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide:
+                                        BorderSide(color: fieldGrey, width: 1),
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Expanded(
-                                      child: AwesomeButtonWidget(
-                                          widget: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Start Now",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Mont'),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward,
-                                                color: Colors.white,
-                                                size: 18,
-                                              ),
-                                            ],
-                                          ),
-                                          heigth: 48,
-                                          onPressed: () async {
-                                            print("Hello ");
-                                            if (formKey.currentState!.validate()) {
-                                              // controller.switchBool();
-                                              var response =
-                                                  await AuthService.signUp(
-                                                      RegistrationModel(
-                                                name: nameController.text,
-                                                email: emailController.text,
-                                                idToken: idTokenResult,
-                                                gender: selectedGender,
-                                                birthDay: controller
-                                                    .birthDateController.value,
-                                              ));
-      
-                                              if (response.error) {
-                                                // snackBarModel("echec".tr,response.errorMessage , true);
-                                                // controller.switchBool();
-                                              } else {
-                                                Get.to(() => const HomeScreen());
-                                                // controller.switchBool();
-                                              }
-                                            }
-                                          }))
-                                ],
-                              ),
-                            ]),
                             ),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: AwesomeButtonWidget(
+                                        widget: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Text(
+                                              "Start Now",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  fontFamily: 'Mont'),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.white,
+                                              size: 18,
+                                            ),
+                                          ],
+                                        ),
+                                        heigth: 48,
+                                        onPressed: () async {
+                                          print("Hello ");
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            // controller.switchBool();
+                                            var response =
+                                                await AuthService.signUp(
+                                                    RegistrationModel(
+                                              name: nameController.text,
+                                              email: emailController.text,
+                                              idToken: idTokenResult,
+                                              gender: selectedGender,
+                                              birthDay: controller
+                                                  .birthDateController.value,
+                                            ));
+
+                                            if (response.error) {
+                                              //snackBarModel("echec".tr,response.errorMessage , true);
+                                              // controller.switchBool();
+                                              print(response.errorMessage);
+                                            } else {
+                                              Get.to(() => const HomeScreen());
+                                              // controller.switchBool();
+                                            }
+                                          }
+                                        }))
+                              ],
+                            ),
+                          ]),
+                    ),
                   ],
                 ),
               )

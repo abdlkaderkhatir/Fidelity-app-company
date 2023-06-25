@@ -6,8 +6,8 @@ import 'package:fidelity_app/utils/server_data.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  
-  static Future<General<String>> login(String email, String password, String tokenNotification) async {
+  static Future<General<String>> login(
+      String email, String password, String tokenNotification) async {
     try {
       http.Response response = await http.post(Uri.parse(urlLogin), body: {
         "email": email,
@@ -30,22 +30,27 @@ class AuthService {
   static Future<General<String>> signUp(RegistrationModel registration) async {
     try {
       print(registration.toString());
-      
-      http.Response response = await http.post(Uri.parse(urlSignup), body: {
-        "idToken": registration.idToken,
-        'name': registration.name,
-        'email': registration.email,
-        'birthDate': registration.birthDay,
-        'gender': registration.gender,
-      });
 
+      http.Response response = await http.post(Uri.parse(urlSignup),
+          headers: {"content-type": "application/json"},
+          body: jsonEncode({
+            "idToken": registration.idToken,
+            'name': registration.name,
+            'email': registration.email,
+            'birth_date': registration.birthDay,
+            'gender': registration.gender,
+          }));
 
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
-        print("===============================================================");
+        print("======headers=======");
+        print(response.headers);
+        print(
+            "===============================================================");
         print(jsonData);
-        print("===============================================================");
-        // return General<String>(data: jsonData["data"]["token"]);
+        print(
+            "===============================================================");
+        return General<String>(data: response.headers["set-cookie"]);
       } else if (response.statusCode == 409) {
         return General<String>(
             data: "", error: true, errorMessage: "account_exist");

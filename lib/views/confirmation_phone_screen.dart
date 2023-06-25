@@ -7,9 +7,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
-
 class ConfirmationPhoneScreen extends StatefulWidget {
-
   final String phone, verficationId;
 
   const ConfirmationPhoneScreen(
@@ -56,9 +54,9 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                         color: Colors.black,
                       )),
                   SizedBox(height: 2.h),
-                   Text(
+                  Text(
                       'Enter The 6-digit PIN that was been sent to +213 ${widget.phone}',
-                      style:const  TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Mont",
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
@@ -119,16 +117,17 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                         Row(
                           children: [
                             Expanded(
-                              child: AwesomeButtonWidget(
+                                child: AwesomeButtonWidget(
                               heigth: 48,
                               onPressed: () async {
-                                 if (formKey.currentState!.validate()) {  
-                                        await authController.confiramationPhoneNumber(widget.verficationId);   
-                                  }
+                                if (formKey.currentState!.validate()) {
+                                  await authController.confiramationPhoneNumber(
+                                      widget.verficationId);
+                                }
                               },
-                              widget: const Row(
+                              widget: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children:  [
+                                children: const [
                                   Text(
                                     "Create my Profile",
                                     style: TextStyle(
@@ -158,9 +157,7 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
                       Expanded(
                           child: OutlineAwesomeButton(
                         heigth: 48,
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         text: "Resend Code",
                       ))
                     ],
