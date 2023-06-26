@@ -1,3 +1,4 @@
+import 'package:fidelity_app/controllers/local_controller.dart';
 import 'package:fidelity_app/controllers/signup_controller.dart';
 import 'package:fidelity_app/model/registration.dart';
 import 'package:fidelity_app/services/authService.dart';
@@ -33,6 +34,7 @@ class _CompleteInscriptionScreenState extends State<CompleteInscriptionScreen> {
   ];
 
   final controller = Get.put(SignUpController());
+  final localController = Get.put(LocalController());
   FirebaseAuth auth = FirebaseAuth.instance;
   String idTokenResult = "";
 
@@ -211,6 +213,7 @@ class _CompleteInscriptionScreenState extends State<CompleteInscriptionScreen> {
                                                 // controller.switchBool();
                                                 print("++++++++++++++++++++++++++++");
                                               } else {
+                                                LocalController.setToken(response.data);
                                                 Get.to(() => const HomeScreen());
                                                 // controller.switchBool();
                                               }

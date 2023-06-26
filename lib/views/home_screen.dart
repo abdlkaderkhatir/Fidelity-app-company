@@ -1,3 +1,5 @@
+import 'package:fidelity_app/model/card.dart';
+import 'package:fidelity_app/services/cardService.dart';
 import 'package:fidelity_app/utils/theme.dart';
 import 'package:fidelity_app/views/activate_screen.dart';
 import 'package:fidelity_app/widgets/awesome_button_widget.dart';
@@ -14,6 +16,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Cards> listcards = [];
+  bool error = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getListCards();
+    super.initState();
+  }
+
+  getListCards() async {
+    print("fetch cards");
+    var response = await CardService.listClientCards();
+    if (!response.error) {
+      setState(() {
+        listcards = response.data ?? [];
+      });
+    } else {
+      error = true;
+      print("im here");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       width: 20,
                     ),
-                    Expanded(
+                    const Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text('Welcome Back 👋',
                             style: TextStyle(
                               fontFamily: "Mont",
@@ -88,190 +113,69 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 Expanded(
-                    child: ListView(
-                  children: [
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 8.h,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: fieldGrey,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text('Supermarket',
-                          style: TextStyle(
-                            fontFamily: "Mont",
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ))
+                  child: listcards.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: listcards.length,
+                          itemBuilder: (context, index) {
+                            final card = listcards[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                height: 8.h,
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: fieldGrey,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child:  Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${card.store!.name} ${card.store!.id}',
+                                        style:const TextStyle(
+                                          fontFamily: "Mont",
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black,
+                                        )),
+                                    Text('points :${card.points}',
+                                        style:const TextStyle(
+                                          fontFamily: "Mont",
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            );
+                          })
+                      : const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                             SizedBox(
+                              height: 50,
+                              width: double.infinity,
+                            ),
+                             Image(
+                              image: AssetImage("assets/aucun.png"),
+                              height: 230,
+                              width: 230,
+                            ),
+                             SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              'Vous avez pas les cartes de fidelity',
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                  fontFamily: "DIN"),
+                            ),
+                          ],
+                        ),
+                )
               ],
             )),
         Positioned(
@@ -299,12 +203,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: AwesomeButtonWidget(
                         onPressed: () {
-                          Get.to(()=>const ActivateAccountScreen());
-                          
+                          Get.to(() => const ActivateAccountScreen());
                         },
-                        widget: Row(
+                        widget:const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children:  [
                             Text(
                               "add a Store",
                               style: TextStyle(

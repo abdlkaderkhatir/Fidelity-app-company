@@ -31,26 +31,24 @@ class AuthService {
     try {
      
       Response response = await post(Uri.parse(urlSignup),
-          // headers: {"content-type": "application/json"},
-          body: {
+          headers: {'Content-type': 'application/json'},
+          body: json.encode({
             "idToken": registration.idToken,
             'name': registration.name,
             'email': registration.email,
             'birth_date': registration.birthDay,
             'gender': registration.gender,
-          });
+          }));
 
-      if (response.statusCode == 201) {
-        var jsonData = jsonDecode(response.body);
-        print("======headers=======");
-        print(response.headers);
-        print(
-            "===============================================================");
-        print(jsonData);
-        print(
-            "===============================================================");
+      if (response.statusCode == 200) {
+            var jsonData = jsonDecode(response.body);
+            print("======headers=======");
+            print(response.headers);
+            print( "===============================================================");
+            print(jsonData);
+            print("===============================================================");
 
-        // return General<String>(data: response.headers["set-cookie"]);
+        return General<String>(data: response.headers["set-cookie"]);
       } else if (response.statusCode == 409) {
         return General<String>(
             data: "", error: true, errorMessage: "account_exist");

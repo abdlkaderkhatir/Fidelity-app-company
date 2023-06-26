@@ -13,7 +13,7 @@ class LocalController{
   }
 
   static String getToken(){
-    return box.read("token") ??"";
+    return box.read("token") ?? "";
   }
 
   static String getLang(){

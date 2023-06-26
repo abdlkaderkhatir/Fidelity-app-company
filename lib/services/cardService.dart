@@ -1,29 +1,39 @@
 import 'dart:convert';
 import 'package:fidelity_app/controllers/local_controller.dart';
 import 'package:fidelity_app/services/general.dart';
+import 'package:fidelity_app/utils/server_data.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:fidelity_app/model/card.dart';
 
 class CardService {
 
-   static Future<General<String>> addCard(int store_id) async {
+//   create new store :
+// post /partner/store/create
+// body : { name:"test store", sellsabeel_id : 1 }
+
+   static Future<General<dynamic>> addCard(int storeId) async {
+
+    // int parsedData = storeId as int;
     
-     Map<String, dynamic> body = {
-      "store_id": store_id,
-    };
+    var data = {"store_id": storeId };
+    print(data);
     
     var header = {
-      'Accept': 'application/json',
-      'Content-type': 'application/json',
-      // 'x-access-token': LocalController.getToken()
-      // "cookie" : "authorization=........."
+      'Content-Type': 'application/json',
+      'cookie': LocalController.getToken()
     };
 
     try {
-      http.Response response = await http.post(Uri.parse(""),
-          headers: header, body: json.encode(body));
+      http.Response response = await http.post(Uri.parse(urlAddCard),
+          headers: header, body: jsonEncode(data));
       if (response.statusCode == 200) {
+        print(response.statusCode);
         var jsonData = jsonDecode(response.body);
-        return General<String>(data: jsonData["data"]);
+        print("============================================");
+        print(jsonData);
+        
+        return General<dynamic>(data: jsonData);
       }
       return General<String>(error: true);
     } on Exception catch (e) {
@@ -31,24 +41,26 @@ class CardService {
     }
   }
 
- static Future<General<List<String>>> listClientCards() async {
+ static Future<General<List<Cards>>> listClientCards() async {
     // var user = LocalController.getProfile();
     try {
-      // String url = urlSavedEvent + "${user.idClient}/savedEvents";
-      http.Response response = await http.get(Uri.parse(""),
-          headers: {'x-access-token': LocalController.getToken()});
+      
+      http.Response response = await http.get(Uri.parse(urlListCrads),
+          headers: {'cookie': LocalController.getToken()});
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
-        List<String> events = [];
+        // print("===================================================");
+        // print(jsonData["data"]);
+        List<Cards> events = [];
         for (var item in jsonData["data"]) {
-          // events.add(EventModel.fromJson(item));
+          events.add(Cards.fromJson(item));
         }
         print(events.length);
-        return General<List<String>>(data: events);
+        return General<List<Cards>>(data: events);
       }
-      return General<List<String>>(error: true);
+      return General<List<Cards>>(error: true);
     } on Exception catch (e) {
-      return General<List<String>>(error: true);
+      return General<List<Cards>>(error: true);
     }
   }
 }

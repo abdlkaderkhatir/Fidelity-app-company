@@ -1,6 +1,9 @@
+import 'package:fidelity_app/routes/routes.dart';
+import 'package:fidelity_app/services/cardService.dart';
 import 'package:fidelity_app/widgets/outlined_awesome_button.dart';
 import 'package:fidelity_app/widgets/text_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ActivateAccountbyText extends StatefulWidget {
@@ -13,7 +16,6 @@ class ActivateAccountbyText extends StatefulWidget {
 class _ActivateAccountbyTextState extends State<ActivateAccountbyText> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController codeController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -57,11 +59,11 @@ class _ActivateAccountbyTextState extends State<ActivateAccountbyText> {
                           text: "Enter le code",
                           controller: codeController,
                           validator: (value) {
-                            if (value.toString().length <= 2) {
-                              return 'Enter valid code';
-                            } else {
-                              return null;
-                            }
+                            // if (value.toString().length <= 2) {
+                            //   return 'Enter valid code';
+                            // } else {
+                            //   return null;
+                            // }
                           },
                         ),
                         const SizedBox(
@@ -71,7 +73,9 @@ class _ActivateAccountbyTextState extends State<ActivateAccountbyText> {
                           children: [
                             Expanded(
                                 child: OutlineAwesomeButton(
-                              onPressed: () async {},
+                              onPressed: () async {
+
+                              },
                               text: "ACTIVER LE COMPTE",
                             )),
                           ],
