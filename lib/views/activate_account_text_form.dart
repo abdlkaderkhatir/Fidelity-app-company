@@ -16,6 +16,16 @@ class ActivateAccountbyText extends StatefulWidget {
 class _ActivateAccountbyTextState extends State<ActivateAccountbyText> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController codeController = TextEditingController();
+  addCards(int idStore) async {
+    var response = await CardService.addCard(idStore);
+    if (!response.error) {
+      Get.toNamed(Routes.homeScreen);
+    } else {
+      // error = true;
+      // print(LocalController.getToken());
+      Get.back();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,7 +84,7 @@ class _ActivateAccountbyTextState extends State<ActivateAccountbyText> {
                             Expanded(
                                 child: OutlineAwesomeButton(
                               onPressed: () async {
-
+                                  addCards(int.parse(codeController.text.trim()));
                               },
                               text: "ACTIVER LE COMPTE",
                             )),
